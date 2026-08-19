@@ -68,19 +68,25 @@ Vercel → projet `pelse-site` → **Settings → Domains** :
 
 ### 3. DNS chez OVH
 
-Zone DNS de `pelse.fr` → créer **exactement** les enregistrements que Vercel
-affiche à l'étape précédente. Typiquement :
+**État relevé le 19/08/2026** — à vérifier avant d'agir, ça a pu bouger :
 
-| Type  | Nom | Cible                    |
-|-------|-----|--------------------------|
-| A     | `@` | l'IP indiquée par Vercel |
-| CNAME | `www` | `cname.vercel-dns.com` |
+| Nom | Type | Valeur actuelle | Quoi en faire |
+|---|---|---|---|
+| `@` | A | `216.198.79.1` | **garder** — c'est déjà Vercel |
+| `@` | A | `213.186.33.5` | **supprimer** — parking OVH |
+| `www` | A | `213.186.33.5` | **remplacer** par un CNAME vers Vercel |
+| `app` | CNAME | `…vercel-dns-017.com` | **ne pas toucher** — c'est l'application |
+| `@` | MX | `mail.protonmail.ch`, `mailsec…` | **ne pas toucher** — votre messagerie |
+| `@` | TXT | `protonmail-verification=…`, `v=spf1…` | **ne pas toucher** |
 
-⚠ **Ne toucher à rien d'autre.** En particulier, laisser en place :
+Deux enregistrements A sur `@`, c'est un tirage au sort : un visiteur sur deux
+tombe sur la page de parking d'OVH. D'où la suppression du `213.186.33.5`.
 
-- `app` — c'est l'application, elle pointe déjà ailleurs ;
-- les enregistrements **MX** et tout ce qui concerne la messagerie ;
-- `send` — utilisé par Resend pour l'envoi des courriels.
+`pelse.fr` répond aujourd'hui **404** : l'adresse pointe bien vers Vercel, mais
+aucun projet Vercel ne réclame encore ce domaine. C'est l'étape 2 qui le règle.
+
+`send.pelse.fr` ne résout rien pour l'instant : si Resend doit s'en servir, ce
+sera à configurer séparément — sans rapport avec le site.
 
 La propagation prend de quelques minutes à quelques heures. Vercel émet le
 certificat tout seul une fois les enregistrements vus.
