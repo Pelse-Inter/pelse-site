@@ -50,6 +50,7 @@
   --surface:    #FFFFFF;
   --survol:     #F0F1F3;
   --large:      1120px;   /* largeur utile de la page   */
+  --texte-max:  64ch;     /* longueur de ligne confortable */
 }
 
 * { box-sizing: border-box; }
@@ -127,8 +128,24 @@ img { display: block; max-width: 100%; height: auto; }
 .btn--bloc { width: 100%; }
 .btn--xl { font-size: 17px; padding: 16px 28px; border-radius: 10px; }
 
-/* ---------- Sections ---------- */
+/* ---------- Sections ----------
+   La maquette fixe 1120 px. Sur un grand écran, ça laisse 400 px de vide de
+   chaque côté pendant que les captures d'application, elles, sont trop
+   petites pour qu'on y lise quoi que ce soit — et c'est précisément ce qu'on
+   demande au visiteur de regarder.
+   La page s'élargit donc avec l'écran, jusqu'à 1400 px. Les PARAGRAPHES, eux,
+   restent bornés : une ligne de 1400 px serait illisible, l'œil perd le
+   début de la ligne suivante. C'est la largeur des IMAGES qu'on gagne, pas
+   celle du texte. */
 .section { max-width: var(--large); margin: 0 auto; padding: 72px 24px; }
+
+@media (min-width: 1400px) {
+  :root { --large: 1400px; }
+  /* La colonne de texte des blocs de fonctionnalité ne suit pas : elle garde
+     sa part, l'image prend le reste. */
+  .fonction__texte { flex: 1 1 340px; max-width: 480px; }
+  .fonction__visuel { flex: 2 1 560px; }
+}
 .section--accroche { padding: 88px 24px 72px; }
 .section--fonctions { padding: 72px 24px; display: flex; flex-direction: column; gap: 88px; }
 .section--essai { padding: 80px 24px 112px; text-align: center; }
@@ -179,7 +196,8 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .grille-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; }
 .grille-3 h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; }
-.grille-3 p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--gris); text-wrap: pretty; }
+.grille-3 p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--gris);
+               text-wrap: pretty; max-width: var(--texte-max); }
 
 /* ---------- Blocs de fonctionnalité ---------- */
 .fonction { display: flex; flex-wrap: wrap; align-items: center; gap: 48px; }
@@ -204,7 +222,8 @@ img { display: block; max-width: 100%; height: auto; }
   margin: 0 0 12px; font-size: clamp(22px, 2.6vw, 28px);
   letter-spacing: -.015em; font-weight: 700;
 }
-.fonction p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--gris); text-wrap: pretty; }
+.fonction p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--gris);
+               text-wrap: pretty; max-width: var(--texte-max); }
 .fonction__note { margin: 10px 0 0 !important; font-size: 14px !important; color: var(--gris-clair) !important; }
 
 .cadre--fonction { border-radius: 12px; padding: 10px; box-shadow: 0 16px 40px -20px rgba(31, 35, 40, .15); }
