@@ -91,13 +91,13 @@ img { display: block; max-width: 100%; height: auto; }
   max-width: var(--large); margin: 0 auto; padding: 0 24px; height: 60px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
-.marque { display: flex; align-items: center; gap: 10px; color: var(--encre); }
+.marque { display: flex; align-items: center; color: var(--encre); }
 .marque:hover { color: var(--encre); }
-.marque__p {
-  width: 26px; height: 26px; background: var(--encre-2); border-radius: 7px;
-  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px;
-}
-.marque__nom { font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+
+/* Le logo : symbole + mot. Le symbole hérite de la couleur du texte, donc il
+   reste juste sur fond clair comme sur fond sombre, sans deuxième fichier. */
+.logo { display: inline-flex; align-items: center; gap: 9px; color: var(--encre-2); }
+.logo__mot { font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
 .nav { display: flex; align-items: center; gap: 8px; }
 
 /* ---------- Boutons ----------
@@ -269,10 +269,6 @@ img { display: block; max-width: 100%; height: auto; }
   align-items: center; justify-content: space-between;
 }
 .pied__marque { display: flex; align-items: center; gap: 8px; }
-.pied__p {
-  width: 20px; height: 20px; background: var(--encre-2); border-radius: 5px;
-  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 12px;
-}
 .pied__copy { font-size: 14px; color: var(--gris-clair); }
 .pied__nav { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; }
 .pied__nav a { color: var(--gris); }

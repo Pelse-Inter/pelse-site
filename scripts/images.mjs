@@ -81,14 +81,14 @@ for (const [nom, largeurs] of PLAN) {
 // plutôt que de dépendre d'un fichier : c'est la même forme que dans l'app,
 // et elle tient en dix lignes.
 {
-  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512">
-    <rect width="512" height="512" rx="118" fill="#26292E"/>
-    <text x="256" y="366" font-family="Hanken Grotesk, Helvetica, Arial, sans-serif"
-          font-size="320" font-weight="800" fill="#FFFFFF" text-anchor="middle">P</text>
+  // Le VRAI symbole, repris de l'application — même tracé, même marque.
+  const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="512" height="512">
+    <rect width="640" height="640" rx="148" fill="#26292E"/>
+    <path d="M205 135 H495 V540 H405 V225 H295 V465 H140 V375 H205 Z" fill="#FFFFFF"/>
   </svg>`);
   await sharp(svg).png().toFile("public/icon.png");
   await sharp(svg).resize(180, 180).png().toFile("public/apple-icon.png");
-  console.log("✓ icon.png + apple-icon.png");
+  console.log("✓ icon.png + apple-icon.png (symbole Pelse)");
 }
 
 fs.writeFileSync("app/captures-dimensions.json", JSON.stringify(dimensions, null, 2) + "\n");

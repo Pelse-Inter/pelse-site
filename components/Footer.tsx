@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { CONTACT } from "./liens";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
     <footer className="pied">
       <div className="pied__in">
         <div className="pied__marque">
-          <span className="pied__p" aria-hidden="true">P</span>
+          <Logo taille={20} mot={false} />
           <span className="pied__copy">© {new Date().getFullYear()} Pelse</span>
         </div>
         <nav className="pied__nav" aria-label="Liens légaux">
