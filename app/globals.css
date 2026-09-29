@@ -316,3 +316,14 @@ img { display: block; max-width: 100%; height: auto; }
 .legal h2 { margin: 40px 0 12px; font-size: 20px; font-weight: 700; }
 .legal p, .legal li { font-size: 16px; line-height: 1.65; color: var(--gris); }
 .legal a { color: var(--encre-2); text-decoration: underline; }
+
+/* La FAQ : une question par ligne, la réponse s'ouvre au doigt (<details>,
+   sans script). La cible fait toute la largeur et 48 px au moins. */
+.faq__q { border-bottom: 1px solid var(--bord); }
+.faq__q summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between;
+                  align-items: center; gap: 16px; min-height: 48px; padding: 12px 0;
+                  font-size: 17px; font-weight: 600; color: var(--encre); }
+.faq__q summary::-webkit-details-marker { display: none; }
+.faq__q summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--gris-clair); flex: none; }
+.faq__q[open] summary::after { content: "−"; }
+.faq__q p { margin: 0 0 16px; }
