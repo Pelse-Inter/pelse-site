@@ -84,24 +84,27 @@ const THEMES: { titre: string; questions: QR[] }[] = [
 
 export default function Faq() {
   return (
-    <main id="contenu" className="legal faq">
+    <main id="contenu" className="texte">
+      <span className="cap cap--bleu">Questions</span>
       <h1>Questions fréquentes</h1>
-      <p className="legal__maj">Les réponses courtes. Une question qui n’y est pas ? Écrivez-nous.</p>
+      <p className="texte__sous">Les réponses courtes. Une question qui n’y est pas ? Écrivez-nous.</p>
 
       {THEMES.map((t) => (
         <section key={t.titre}>
           <h2>{t.titre}</h2>
-          {t.questions.map((x) => (
-            <details key={x.q} className="faq__q">
-              <summary>{x.q}</summary>
-              <p>{x.r}</p>
-            </details>
-          ))}
+          <div className="questions">
+            {t.questions.map((x) => (
+              <details key={x.q} className="faq__q">
+                <summary>{x.q}</summary>
+                <p>{x.r}</p>
+              </details>
+            ))}
+          </div>
         </section>
       ))}
 
       <h2>Nous écrire</h2>
-      <p>
+      <p className="texte__contact">
         <a href={`mailto:${CONTACT}`}>{CONTACT}</a> — réponse sous 48 h maximum.
       </p>
     </main>

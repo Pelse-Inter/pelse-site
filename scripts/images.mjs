@@ -18,7 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
-const SOURCE = process.env.CAPTURES_SRC ?? "/Users/simon/Projets/pelse/captures";
+const SOURCE = process.env.CAPTURES_SRC ?? "../pelse/captures-site";
 const CIBLE = "public/captures";
 
 // Recadrages préalables, exprimés dans les pixels de l'original.
@@ -26,25 +26,43 @@ const CIBLE = "public/captures";
 // FEUILLE et on jette l'habillage sombre de Chrome, qui n'est pas notre
 // application et qui jurerait sur une page claire.
 const RECADRAGE = {
-  "4-cerfa-15497": { left: 950, top: 108, width: 1534, height: 906 },
+  // Les PDF sont des feuilles A4 entières : on garde le HAUT (en-tête, client,
+  // travail), là où se lit ce que le document apporte.
+  "doc-rapport": { left: 0, top: 0, width: 2480, height: 2200 },
+  "doc-cerfa":   { left: 0, top: 0, width: 2480, height: 2200 },
 };
 
-const PLAN = [
-  ["1-interventions-bureau", [1600, 800]],
-  ["4-cerfa-15497",          [1600, 800]],
-  ["5-devis-retards",        [1600, 800]],
-  ["6-materiel",             [1600, 800]],
-  ["7-immeuble-digicode",    [1600, 800]],
-  ["2-journee-technicien",   [750]],
-  ["3-fiche-technicien",     [750]],
-];
+// Les captures de l'application d'aujourd'hui (29/09/2026), sur la démo
+// fictive « Moreau Élec ». Chaque nom du site pointe vers le fichier que
+// produit, dans le dépôt de l'app, `node scripts/demo/captures.mjs <dossier>`.
+const ORIGINES = {
+  "bureau-accueil": "1-bureau/01-accueil",               "bureau-planning": "1-bureau/02-planning-semaine",
+  "bureau-interventions": "1-bureau/05-interventions",   "bureau-fiche": "1-bureau/06-intervention-en-cours",
+  "bureau-devis": "1-bureau/10-devis",                   "bureau-sav": "1-bureau/13-sav",
+  "bureau-materiel": "1-bureau/15-materiel",             "bureau-clients": "1-bureau/16-clients",
+  "bureau-immeuble": "1-bureau/19-immeuble-acces",       "bureau-cerfa": "1-bureau/21-cerfa-fiche",
+  "bureau-import": "1-bureau/22-import-clients",
+  "theme-sombre": "4-themes/bureau-accueil-sombre",      "theme-beige": "4-themes/bureau-accueil-beige",
+  "tel-accueil": "2-mobile-dirigeant/01-accueil",        "tel-devis": "2-mobile-dirigeant/04-devis",
+  "tel-tech-liste": "3-mobile-technicien/01-mes-interventions",
+  "tel-tech-acces": "3-mobile-technicien/02-fiche-acces-digicode",
+  "tel-tech-planning": "3-mobile-technicien/03-planning",
+  "tel-tech-encours": "3-mobile-technicien/06-intervention-en-cours",
+  "tel-tech-chantier": "3-mobile-technicien/07-chantier-journal",
+  "doc-rapport": "5-pdf/rapport-intervention",           "doc-cerfa": "5-pdf/cerfa-15497",
+};
+// Bureau : 1600 et 800 px (srcset). Téléphone : 750 px, sa largeur réelle
+// d'affichage. Documents : 900 px.
+const largeurs = (nom) => (nom.startsWith("tel-") ? [750] : nom.startsWith("doc-") ? [900] : [1600, 800]);
+const PLAN = Object.keys(ORIGINES).map((n) => [n, largeurs(n)]);
 
+fs.rmSync(CIBLE, { recursive: true, force: true });
 fs.mkdirSync(CIBLE, { recursive: true });
 const dimensions = {};
 let total = 0;
 
 for (const [nom, largeurs] of PLAN) {
-  const src = path.join(SOURCE, `${nom}.png`);
+  const src = path.join(SOURCE, `${ORIGINES[nom]}.png`);
   const coupe = RECADRAGE[nom];
   const base = () => (coupe ? sharp(src).extract(coupe) : sharp(src));
   const meta = coupe
@@ -62,19 +80,8 @@ for (const [nom, largeurs] of PLAN) {
   dimensions[nom] = { w: largeurs[0], h: Math.round((largeurs[0] * meta.height) / meta.width) };
 }
 
-// ---------- Image de partage (Open Graph) ----------
-// 1200 × 630 imposé par les réseaux. La capture est plus haute que ce format :
-// on recadre le HAUT, là où se trouvent le titre et le planning. Un recadrage
-// centré couperait l'en-tête, c'est-à-dire ce qui identifie l'application.
-{
-  const src = path.join(SOURCE, "8-tableau-de-bord.png");
-  await sharp(src).resize({ width: 1200 })
-    .extract({ left: 0, top: 0, width: 1200, height: 630 })
-    .png({ compressionLevel: 9 }).toFile("public/og.png");
-  const o = fs.statSync("public/og.png").size;
-  total += o;
-  console.log(`✓ og.png${" ".repeat(31)} ${String(Math.round(o / 1024)).padStart(4)} Ko  (1200 × 630)`);
-}
+// L'image de partage (Open Graph) est rendue par scripts/og.mjs : elle porte
+// du texte, que sharp ne sait pas composer proprement.
 
 // ---------- Favicon ----------
 // Le logo de Pelse est un carré anthracite au P blanc. On le dessine ici
