@@ -1,6 +1,6 @@
 // Contrôles du protocole qui se mesurent : requêtes tierces, poids, liens.
 import puppeteer from "puppeteer-core";
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ["--no-sandbox"], protocolTimeout: 120000 });
 const p = await b.newPage();
 await p.setViewport({ width: 390, height: 844, deviceScaleFactor: 2 });

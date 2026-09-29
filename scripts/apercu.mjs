@@ -1,7 +1,7 @@
 // Vues d'ensemble du site, pour relecture.
 import puppeteer from "puppeteer-core";
 import fs from "node:fs";
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 fs.mkdirSync("apercu", { recursive: true });
 const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ["--no-sandbox"], protocolTimeout: 180000 });
 

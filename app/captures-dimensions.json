@@ -1,30 +1,90 @@
 {
-  "1-interventions-bureau": {
+  "bureau-accueil": {
     "w": 1600,
     "h": 1000
   },
-  "4-cerfa-15497": {
-    "w": 1600,
-    "h": 945
-  },
-  "5-devis-retards": {
+  "bureau-planning": {
     "w": 1600,
     "h": 1000
   },
-  "6-materiel": {
+  "bureau-interventions": {
     "w": 1600,
     "h": 1000
   },
-  "7-immeuble-digicode": {
+  "bureau-fiche": {
     "w": 1600,
     "h": 1000
   },
-  "2-journee-technicien": {
+  "bureau-devis": {
+    "w": 1600,
+    "h": 1000
+  },
+  "bureau-sav": {
+    "w": 1600,
+    "h": 1000
+  },
+  "bureau-materiel": {
+    "w": 1600,
+    "h": 1000
+  },
+  "bureau-clients": {
+    "w": 1600,
+    "h": 1000
+  },
+  "bureau-immeuble": {
+    "w": 1600,
+    "h": 1000
+  },
+  "bureau-cerfa": {
+    "w": 1600,
+    "h": 1000
+  },
+  "bureau-import": {
+    "w": 1600,
+    "h": 1000
+  },
+  "theme-sombre": {
+    "w": 1600,
+    "h": 1000
+  },
+  "theme-beige": {
+    "w": 1600,
+    "h": 1000
+  },
+  "tel-accueil": {
     "w": 750,
     "h": 1623
   },
-  "3-fiche-technicien": {
+  "tel-devis": {
     "w": 750,
     "h": 1623
+  },
+  "tel-tech-liste": {
+    "w": 750,
+    "h": 1623
+  },
+  "tel-tech-acces": {
+    "w": 750,
+    "h": 1623
+  },
+  "tel-tech-planning": {
+    "w": 750,
+    "h": 1623
+  },
+  "tel-tech-encours": {
+    "w": 750,
+    "h": 1623
+  },
+  "tel-tech-chantier": {
+    "w": 750,
+    "h": 1623
+  },
+  "doc-rapport": {
+    "w": 900,
+    "h": 798
+  },
+  "doc-cerfa": {
+    "w": 900,
+    "h": 798
   }
 }

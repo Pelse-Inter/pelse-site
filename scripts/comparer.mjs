@@ -1,7 +1,7 @@
 // Compare le site construit à la maquette, aux trois largeurs du protocole.
 import puppeteer from "puppeteer-core";
 import fs from "node:fs";
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const MAQUETTE = "file:///Users/simon/Downloads/Page%20d'accueil%20Pelse.html";
 const SITE = "http://localhost:4100/";
 fs.mkdirSync("comparaison", { recursive: true });

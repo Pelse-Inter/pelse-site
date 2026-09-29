@@ -11,8 +11,8 @@ elle, tombe.
 
 Aucun traceur, aucun cookie, aucun script d'un autre domaine, aucune mesure
 d'audience. Il n'y a donc **pas de bandeau cookies** : il n'y a rien à
-consentir. La police est auto-hébergée — extraite de la maquette, donc
-identique — ce qui évite l'appel à Google Fonts.
+consentir. La police (Inter, la même que dans l'application) est
+auto-hébergée, ce qui évite l'appel à Google Fonts.
 
 ## Développer
 
@@ -23,23 +23,36 @@ npm run build      # écrit le site statique dans out/
 npm start          # sert out/ pour vérifier le résultat réel
 ```
 
+## Les pages
+
+- `/` — l'accueil : l'accroche, puis le **parcours d'une intervention** en
+  cinq étapes, avec les couleurs qu'elles portent dans l'app.
+- `/visite/` — **l'application écran par écran**, à envoyer à un prospect
+  (« pelse.fr/visite ») : ordinateur, téléphone, documents, thèmes.
+- `/faq/` — les questions fréquentes, vers lesquelles l'app renvoie.
+- `/mentions-legales/`, `/cgv/`, `/confidentialite/` — renvoient vers les
+  pages de l'application, qui font foi (une seule version des textes).
+
 ## Les captures d'écran
 
 Elles viennent du dépôt de l'application, où elles se produisent en une
-commande sur un jeu de démonstration **entièrement fictif** (entreprise,
-clients et numéros de téléphone inventés, ces derniers pris dans les tranches
-réservées à la fiction par l'ARCEP).
+commande sur un jeu de démonstration **entièrement fictif** (« Moreau Élec » :
+entreprise, clients et numéros de téléphone inventés, ces derniers pris dans
+les tranches réservées à la fiction par l'ARCEP).
 
 ```bash
-# dans le dépôt de l'app
-npm run db:vitrine && npm run dev   # puis, dans un autre terminal :
-npm run captures
+# dans le dépôt de l'app (base LOCALE — le script refuse la production)
+node scripts/demo/seed.ts
+npm run build && npx next start -p 3100     # puis, dans un autre terminal :
+node scripts/demo/captures.mjs captures-site
 ```
 
-Puis ici, pour les convertir en WebP aux bonnes largeurs :
+Puis ici, pour les convertir en WebP aux bonnes largeurs, et refaire l'image
+de partage (celle qu'affichent WhatsApp et les SMS) :
 
 ```bash
-npm run images
+CAPTURES_SRC=../pelse/captures-site npm run images
+npm run og        # CHROME=/chemin/vers/chrome hors macOS
 ```
 
 Le résultat est versionné : personne n'a besoin de regénérer quoi que ce soit
