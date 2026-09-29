@@ -6,12 +6,13 @@ export const dynamic = "force-static";
 
 const SITE = "https://pelse.fr";
 
-// Quatre pages, écrites à la main : une génération automatique n'apporterait
+// Cinq pages, écrites à la main : une génération automatique n'apporterait
 // rien tant qu'il n'y a pas de contenu qui bouge.
 export default function sitemap(): MetadataRoute.Sitemap {
   const maj = new Date();
   return [
     { url: `${SITE}/`,                  lastModified: maj, changeFrequency: "monthly", priority: 1 },
+    { url: `${SITE}/faq/`,              lastModified: maj, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE}/mentions-legales/`, lastModified: maj, changeFrequency: "yearly",  priority: 0.3 },
     { url: `${SITE}/cgv/`,              lastModified: maj, changeFrequency: "yearly",  priority: 0.3 },
     { url: `${SITE}/confidentialite/`,  lastModified: maj, changeFrequency: "yearly",  priority: 0.3 },

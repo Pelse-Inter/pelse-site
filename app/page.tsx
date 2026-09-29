@@ -198,7 +198,7 @@ export default function Accueil() {
               <span className="tarif__montant">20 €</span>
               <span className="tarif__unite">HT / mois</span>
             </div>
-            <p className="tarif__precision">Par entreprise, jusqu’à 10 utilisateurs.</p>
+            <p className="tarif__precision">Par entreprise, jusqu’à 20 utilisateurs.</p>
             <ul className="tarif__inclus">
               <li>Interventions et planning</li>
               <li>Application mobile technicien, hors ligne</li>

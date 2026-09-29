@@ -10,7 +10,8 @@ export default function Footer() {
           <Logo taille={20} mot={false} />
           <span className="pied__copy">© {new Date().getFullYear()} Pelse</span>
         </div>
-        <nav className="pied__nav" aria-label="Liens légaux">
+        <nav className="pied__nav" aria-label="Liens utiles">
+          <Link href="/faq/">Questions fréquentes</Link>
           <Link href="/mentions-legales/">Mentions légales</Link>
           <Link href="/cgv/">CGV</Link>
           <Link href="/confidentialite/">Confidentialité</Link>
