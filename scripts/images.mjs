@@ -75,9 +75,20 @@ for (const [nom, largeurs] of PLAN) {
     total += o;
     console.log(`✓ ${path.basename(dest).padEnd(38)} ${String(Math.round(o / 1024)).padStart(4)} Ko`);
   }
+  // LA GRANDE VERSION (01/10/2026) — celle qu'on voit en touchant l'image
+  // (components/Visionneuse.tsx). Elle n'est JAMAIS chargée avec la page :
+  // seulement au clic. Bureau 2400 px (on lit le texte d'une fiche), téléphone
+  // à la largeur de l'original, document 1600 px.
+  const g = Math.min(meta.width, nom.startsWith("tel-") ? meta.width : nom.startsWith("doc-") ? 1600 : 2400);
+  {
+    const dest = path.join(CIBLE, `${nom}-grand.webp`);
+    await base().resize({ width: g }).webp({ quality: 85 }).toFile(dest);
+    console.log(`✓ ${path.basename(dest).padEnd(38)} ${String(Math.round(fs.statSync(dest).size / 1024)).padStart(4)} Ko  (au clic)`);
+  }
   // Écrites dans le HTML pour réserver la place AVANT le chargement : sans
   // width/height, la page saute au moment où l'image arrive.
-  dimensions[nom] = { w: largeurs[0], h: Math.round((largeurs[0] * meta.height) / meta.width) };
+  dimensions[nom] = { w: largeurs[0], h: Math.round((largeurs[0] * meta.height) / meta.width),
+                      gw: g, gh: Math.round((g * meta.height) / meta.width) };
 }
 
 // L'image de partage (Open Graph) est rendue par scripts/og.mjs : elle porte

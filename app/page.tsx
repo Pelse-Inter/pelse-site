@@ -103,7 +103,7 @@ export default function Accueil() {
             <span className="cap cap--ciel">En cours</span><span className="etape__num">3 / 5</span>
             <h3>Sur place, le technicien a tout dans la poche</h3>
             <p>Sa journée, l’itinéraire, le digicode, le téléphone du gardien. Il saisit le travail, le matériel, les photos et la signature du client — même sans réseau.</p>
-            <p>Il ne voit que ses interventions, jamais les prix.</p>
+            <p>Son téléphone le prévient quand on lui donne une intervention ou qu’on la déplace. Il ne voit que les siennes, jamais les prix.</p>
           </div>
           <div className="etape__tels">
             <Telephone nom="tel-tech-liste" alt="La journée d’un technicien sur son téléphone" />
