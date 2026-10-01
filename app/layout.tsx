@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import Visionneuse from "@/components/Visionneuse";
 
 const SITE = "https://pelse.fr";
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <Reveal />
+        <Visionneuse />
       </body>
     </html>
   );

@@ -30,19 +30,26 @@ export function Capture({
   const largeurs = bureau ? [1600, 800] : [d.w];
   const src = `/captures/${nom}-${largeurs[0]}.webp`;
   const srcSet = largeurs.map((l) => `/captures/${nom}-${l}.webp ${l}w`).join(", ");
+  // TOUCHER POUR AGRANDIR (01/10/2026) — « qu'on puisse cliquer sur les
+  // images pour les voir en plus grand ». Un VRAI lien vers la grande
+  // version : sans JavaScript, il l'ouvre telle quelle ; avec, la visionneuse
+  // (components/Visionneuse.tsx) la montre par-dessus la page.
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      srcSet={largeurs.length > 1 ? srcSet : undefined}
-      sizes={tailles}
-      width={d.w}
-      height={d.h}
-      alt={alt}
-      loading={prioritaire ? "eager" : "lazy"}
-      fetchPriority={prioritaire ? "high" : undefined}
-      decoding={prioritaire ? "sync" : "async"}
-    />
+    <a className="agrandir" href={`/captures/${nom}-grand.webp`} data-agrandir=""
+       data-largeur={d.gw} data-hauteur={d.gh} aria-label={`Agrandir : ${alt}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        srcSet={largeurs.length > 1 ? srcSet : undefined}
+        sizes={tailles}
+        width={d.w}
+        height={d.h}
+        alt={alt}
+        loading={prioritaire ? "eager" : "lazy"}
+        fetchPriority={prioritaire ? "high" : undefined}
+        decoding={prioritaire ? "sync" : "async"}
+      />
+    </a>
   );
 }
 

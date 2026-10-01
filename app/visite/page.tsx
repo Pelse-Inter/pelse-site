@@ -32,7 +32,7 @@ const BUREAU: Planche[] = [
   { nom: "bureau-accueil", titre: "L’accueil", alt: "L’accueil : la semaine de l’équipe",
     texte: "La semaine de l’équipe : un technicien par ligne, un jour par colonne. Dessous, ce qui est à traiter, planifié, en cours, à facturer." },
   { nom: "bureau-planning", titre: "Le planning", alt: "Le planning de la semaine",
-    texte: "Chaque intervention à son heure, une couleur par technicien. On déplace d’un glisser ; les congés comptent." },
+    texte: "Chaque intervention à son heure, une couleur par technicien ; les devis et les SAV y ont leur bloc. On déplace d’un glisser ; les congés et les réunions comptent." },
   { nom: "bureau-interventions", titre: "Les interventions", alt: "La liste des interventions",
     texte: "Groupées par date : aujourd’hui, en retard, demain, cette semaine, à planifier. Le client, l’adresse, le numéro, sur chaque ligne." },
   { nom: "bureau-fiche", titre: "Une intervention", alt: "La fiche d’une intervention",
@@ -55,7 +55,7 @@ const TELEPHONE: Planche[] = [
   { nom: "tel-accueil", titre: "Le dirigeant", alt: "L’accueil au téléphone",
     texte: "La journée de chaque technicien, jour par jour, et ce qui est à traiter." },
   { nom: "tel-tech-liste", titre: "Le technicien", alt: "Les interventions du technicien",
-    texte: "Ses interventions seulement, avec l’itinéraire et l’appel à un geste." },
+    texte: "Ses interventions seulement, avec l’itinéraire et l’appel à un geste. Son téléphone le prévient quand on lui en donne une, ou qu’on la déplace." },
   { nom: "tel-tech-acces", titre: "Sur place", alt: "La fiche avec les codes d’accès",
     texte: "Le digicode et le gardien, sans appeler le bureau." },
   { nom: "tel-tech-encours", titre: "Le travail fait", alt: "Une intervention en cours",
@@ -70,7 +70,7 @@ export default function Visite() {
         <h1>Pelse, écran par écran.</h1>
         <p>
           Ce que voient le bureau, le dirigeant et le technicien, tel quel. Les données sont celles d’une entreprise
-          de démonstration, inventée.
+          de démonstration, inventée. Touchez une capture pour la voir en grand.
         </p>
         <nav className="sommaire" aria-label="Aller à">
           <a className="cap cap--marine" href="#bureau">Au bureau</a>
